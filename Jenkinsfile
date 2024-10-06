@@ -47,8 +47,8 @@ pipeline {
 
             steps {
                 sh '''
-                    # Set a specific home directory for npm
-                    export HOME=/home/jenkins
+                    # Use a writable directory for npm global installs
+                    export HOME=/tmp/jenkins
                     mkdir -p $HOME/.npm-global
                     
                     # Set npm to use this directory for global installs
