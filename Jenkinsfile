@@ -10,6 +10,7 @@ pipeline {
                 }
             }
             steps {
+                withEnv(['NODE_OPTIONS=--openssl-legacy-provider']) {
                 sh '''
                     cleanWs()
                     ls -la
@@ -19,6 +20,7 @@ pipeline {
                     npm run build
                     ls -la
                 '''
+            }
             }
         }
 
