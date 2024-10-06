@@ -17,7 +17,6 @@ pipeline {
                         node --version
                         npm --version
 			cleanWs()
-   			rm -rf node_modules
                         npm install
                         npm run build
                         ls -la
