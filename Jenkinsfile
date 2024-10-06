@@ -47,11 +47,8 @@ pipeline {
 
             steps {
                 sh '''
-                    # Debugging: Print HOME and current user
-                    echo "HOME: $HOME"
-                    echo "Current User: $(whoami)"
-                    
-                    # Create a directory for global npm installs in the user's home directory
+                    # Set a specific home directory for npm
+                    export HOME=/home/jenkins
                     mkdir -p $HOME/.npm-global
                     
                     # Set npm to use this directory for global installs
@@ -59,6 +56,10 @@ pipeline {
                     
                     # Update the PATH to include the new directory
                     export PATH=$HOME/.npm-global/bin:$PATH
+                    
+                    # Debugging: Print HOME and current user
+                    echo "HOME: $HOME"
+                    echo "Current User: $(whoami)"
                     
                     # Install serve globally
                     npm install -g serve
