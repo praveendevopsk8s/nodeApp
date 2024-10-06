@@ -31,13 +31,12 @@ pipeline {
                 }
             }
             steps {
-			withEnv(['NODE_OPTIONS=--openssl-legacy-provider']) {
                 sh '''
                 test -f build/index.html
                 npm test
                 '''
             }
-			}
-        }		
+		
+	}		
     }
 }
