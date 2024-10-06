@@ -48,9 +48,9 @@ pipeline {
             steps {
                 sh '''
                     # Create a directory for global npm installs in the user's home directory
-                    mkdir -p ~/.npm-global
+                    mkdir -p $HOME/.npm-global
                     # Set npm to use this directory for global installs
-                    npm config set prefix '~/.npm-global'
+                    npm config set prefix '$HOME/.npm-global'
                     # Update the PATH to include the new directory
                     export PATH=$HOME/.npm-global/bin:$PATH
                     # Install serve
