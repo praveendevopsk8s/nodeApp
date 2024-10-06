@@ -47,17 +47,27 @@ pipeline {
 
             steps {
                 sh '''
+                    # Debugging: Print HOME and current user
+                    echo "HOME: $HOME"
+                    echo "Current User: $(whoami)"
+                    
                     # Create a directory for global npm installs in the user's home directory
                     mkdir -p $HOME/.npm-global
+                    
                     # Set npm to use this directory for global installs
                     npm config set prefix="$HOME/.npm-global"
+                    
                     # Update the PATH to include the new directory
                     export PATH=$HOME/.npm-global/bin:$PATH
+                    
                     # Install serve globally
                     npm install -g serve
+                    
                     # Serve the build and run tests
                     nohup serve -s build &
                     sleep 10
+                    
+                    # Run Playwright tests
                     npx playwright test
                 '''
             }
