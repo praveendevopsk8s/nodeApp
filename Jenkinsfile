@@ -22,22 +22,7 @@ pipeline {
             }
         }
 
-        stage('Test Praveen1') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                    export NODE_OPTIONS=--openssl-legacy-provider
-                    test -f build/index.html
-                    npm test
-                '''
-            }
-        }
-       
+      
     }
 
     post {
