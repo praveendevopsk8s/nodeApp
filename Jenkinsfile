@@ -27,7 +27,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
-                    reuseNode  true
+                    reuseNode true
                 }
             }
             steps {
@@ -47,10 +47,15 @@ pipeline {
 
             steps {
                 sh '''
+                    # Create a directory for global npm installs in the user's home directory
                     mkdir -p ~/.npm-global
+                    # Set npm to use this directory for global installs
                     npm config set prefix '~/.npm-global'
-                    export PATH=~/.npm-global/bin:$PATH
+                    # Update the PATH to include the new directory
+                    export PATH=$HOME/.npm-global/bin:$PATH
+                    # Install serve
                     npm install serve
+                    # Serve the build and run tests
                     node_modules/.bin/serve -s build &
                     sleep 10
                     npx playwright test
