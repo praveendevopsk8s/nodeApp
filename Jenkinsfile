@@ -50,13 +50,13 @@ pipeline {
                     # Create a directory for global npm installs in the user's home directory
                     mkdir -p $HOME/.npm-global
                     # Set npm to use this directory for global installs
-                    npm config set prefix '$HOME/.npm-global'
+                    npm config set prefix="$HOME/.npm-global"
                     # Update the PATH to include the new directory
                     export PATH=$HOME/.npm-global/bin:$PATH
-                    # Install serve
-                    npm install serve
+                    # Install serve globally
+                    npm install -g serve
                     # Serve the build and run tests
-                    node_modules/.bin/serve -s build &
+                    nohup serve -s build &
                     sleep 10
                     npx playwright test
                 '''
