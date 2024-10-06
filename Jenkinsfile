@@ -10,14 +10,17 @@ pipeline {
                 }
             }
             steps {
-                sh '''
-                    ls -la
-                    node --version
-                    npm --version
-                    npm install
-                    npm run build
-                    ls -la
-                '''
+                // Set the NODE_OPTIONS environment variable
+                withEnv(['NODE_OPTIONS=--openssl-legacy-provider']) {
+                    sh '''
+                        ls -la
+                        node --version
+                        npm --version
+                        npm install
+                        npm run build
+                        ls -la
+                    '''
+                }
             }
         }
     }
