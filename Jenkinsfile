@@ -69,7 +69,7 @@ pipeline {
                     sleep 10
                     
                     # Run Playwright tests
-                    npx playwright test
+                    npx playwright test --reporter=html
                 '''
             }
         }		
