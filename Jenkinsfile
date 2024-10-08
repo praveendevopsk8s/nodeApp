@@ -1,14 +1,13 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18-alpine' // Use the Docker image for all stages
+            reuseNode true
+        }
+    }
 
     stages {
         stage('Build') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
             steps {
                 withEnv(['NODE_OPTIONS=--openssl-legacy-provider']) {
                     sh '''
@@ -24,12 +23,6 @@ pipeline {
             }
         } 
         stage('Test Praveen1') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
             steps {
                 sh '''
                     test -f build/index.html
@@ -44,7 +37,6 @@ pipeline {
                     reuseNode true
                 }
             }
-
             steps {
                 sh '''
                     # Use a writable directory for npm global installs
