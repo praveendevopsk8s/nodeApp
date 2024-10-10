@@ -1,13 +1,7 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Docker') {
-            steps {
-                sh 'docker build -t myplaywright .'
-            }
-        }
-                
+    stages {                
         stage('Build') {
             agent {
                 docker {
@@ -50,7 +44,6 @@ pipeline {
                     reuseNode true
                 }
             }
-
             steps {
                 sh '''
                     # Use a writable directory for npm global installs
